@@ -1,0 +1,21 @@
+@import "../../styles/variables.scss";
+
+.container {
+  background-color: $dark;
+  padding: 30px;
+  color: $white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .title {
+    text-align: center;
+  }
+
+  .noItems {
+    text-align: center;
+    font-size: 1em;
+    margin-top: 25px;
+  }
+}

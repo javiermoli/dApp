@@ -1,0 +1,26 @@
+@import "../../styles/variables.scss";
+
+.text {
+  color: $white;
+  font-size: 14px;
+  background-color: $background;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: #2d2d32;
+    opacity: 0.8;
+  }
+}
+
+.address {
+  margin-right: 8px;
+  height: 100%;
+  width: 100%;
+}

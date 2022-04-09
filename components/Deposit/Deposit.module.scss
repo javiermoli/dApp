@@ -1,0 +1,47 @@
+@import "../../styles/variables.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 20px 0;
+
+  .inputsContainer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 48px;
+    margin: 20px 0;
+
+    .input {
+      line-height: 1;
+      height: 49px;
+      font-size: max(16px, 1em);
+      font-family: inherit;
+      padding: 0.25em 0.5em;
+      background-color: #fff;
+      border: 2px solid #8b8a8b;
+      border-radius: 4px;
+      transition: 180ms box-shadow ease-in-out;
+
+      &:focus {
+        border-color: $dark;
+        box-shadow: 0 0 0 3px rgba(44, 47, 50, 0.7);
+        outline: 3px solid transparent;
+      }
+    }
+
+    .button {
+      height: 100%;
+    }
+
+    .textError {
+      display: block;
+      color: red;
+      font-size: 0.8em;
+      margin-left: 10px;
+      position: absolute;
+    }
+  }
+}
