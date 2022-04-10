@@ -14,7 +14,7 @@ import { useMintToken } from "../../hooks/useMintToken";
 
 // Styles
 import styles from "./Deposit.module.scss";
-import commonStyles from "../../styles/common.module.scss";
+import commonStyles from "../../styles/Common.module.scss";
 import { useApolloClient } from "@apollo/client";
 import { MINTS } from "../../utils/calls/graphql-queries";
 import { FaSpinner } from "react-icons/fa";

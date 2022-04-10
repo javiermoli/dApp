@@ -4,7 +4,12 @@ import { BsGithub } from "react-icons/bs";
 
 const NavBar = () => (
   <div className={styles.container}>
-    <a className={styles.github} href="">
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      className={styles.github}
+      href="https://github.com/javiermoli/dApps"
+    >
       <BsGithub size={35} />
     </a>
     <Wallet />

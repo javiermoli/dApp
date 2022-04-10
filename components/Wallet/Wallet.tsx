@@ -12,7 +12,7 @@ import DAIABI from "../../config/abi/ERC20.json";
 
 // styles
 import styles from "./Wallet.module.scss";
-import commonStyles from "../../styles/common.module.scss";
+import commonStyles from "../../styles/Common.module.scss";
 
 const Wallet = () => {
   const [unsupportedChain, setUnsupportedChain] = useState(false);
