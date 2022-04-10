@@ -5,15 +5,19 @@ import { getLibrary } from "../utils/web3";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "../utils/graphql";
 import Layout from "../components/Layout/Layout";
+import { QueryClientProvider } from "react-query";
+import { queryClient } from "../utils/reactQuery";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
-      <Web3ReactProvider getLibrary={getLibrary}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </Web3ReactProvider>
+      <QueryClientProvider client={queryClient}>
+        <Web3ReactProvider getLibrary={getLibrary}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </Web3ReactProvider>
+      </QueryClientProvider>
     </ApolloProvider>
   );
 }

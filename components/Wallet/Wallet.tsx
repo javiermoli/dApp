@@ -1,22 +1,39 @@
 import { useEffect, useState } from "react";
-import { useWeb3React } from "@web3-react/core";
+import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
 import { injected } from "../../utils/web3";
 import { formatEther } from "@ethersproject/units";
 import { BigNumberish } from "@ethersproject/bignumber";
 import Blockies from "react-blockies";
 import { exactRound } from "../../utils/currency";
 import { useTokenBalance } from "../../hooks/useTokenBalance";
-import { C_DAI } from "../../config/constants/contracts";
+import { C_DAI, DAI } from "../../config/constants/contracts";
 import cDAIABI from "../../config/abi/CErc20Delegator.json";
+import DAIABI from "../../config/abi/ERC20.json";
 
 // styles
 import styles from "./Wallet.module.scss";
 import commonStyles from "../../styles/common.module.scss";
 
 const Wallet = () => {
+  const [unsupportedChain, setUnsupportedChain] = useState(false);
   const [balance, setBalance] = useState<BigNumberish>("");
   const { activate, account, library, active } = useWeb3React();
   const [cDaiBalance] = useTokenBalance(C_DAI, cDAIABI, 8);
+  const [daiBalance] = useTokenBalance(DAI, DAIABI, 18);
+
+  useEffect(() => {
+    if (!active) {
+      activate(injected, async (error) => {
+        if (error instanceof UnsupportedChainIdError) {
+          setUnsupportedChain(true);
+
+          setTimeout(() => {
+            setUnsupportedChain(false);
+          }, 5000);
+        }
+      });
+    }
+  }, [active, activate]);
 
   useEffect(() => {
     (async () => {
@@ -68,6 +85,14 @@ const Wallet = () => {
           <h6 className={styles.text}>
             {cDaiBalance ? `${cDaiBalance} cDAI` : "---"}
           </h6>
+          <h6 className={styles.text}>
+            {daiBalance ? `${daiBalance} DAI` : "---"}
+          </h6>
+          {unsupportedChain && (
+            <div className={styles.notSupportedChain}>
+              Current chain is not supported. Please, use Kovan testnet!
+            </div>
+          )}
         </>
       )}
     </>

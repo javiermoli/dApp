@@ -4,6 +4,8 @@ import { formatUnits } from "ethers/lib/utils";
 import { useEffect, useState } from "react";
 import { exactRound } from "../utils/currency";
 import { useContract } from "./useContract";
+import { getTokenBalance } from "../utils/calls/tokenQueries";
+import { useQuery } from "react-query";
 
 export const useTokenBalance = (
   tokenAddress: string,
@@ -13,19 +15,18 @@ export const useTokenBalance = (
   const { account } = useWeb3React();
   const { contract } = useContract(tokenAddress, tokenAbi);
   const [balance, setBalance] = useState<string>("");
+  const { data } = useQuery(
+    [tokenAddress, account!, contract?.balanceOf],
+    () => getTokenBalance(account!, contract?.balanceOf),
+    { enabled: !!account && !!contract?.balanceOf }
+  );
 
   useEffect(() => {
-    if (contract && account) {
-      contract.balanceOf(account).then((balance: number) => {
-        const formattedBalance = formatUnits(balance, tokenUnits);
-
-        setBalance(exactRound(formattedBalance, 2));
-      });
-      return () => {
-        setBalance("");
-      };
+    if (data) {
+      const formattedBalance = formatUnits(data, tokenUnits);
+      setBalance(exactRound(formattedBalance, 2));
     }
-  }, [contract, account, tokenUnits]);
+  }, [contract, account, tokenUnits, data]);
 
   return [balance];
 };

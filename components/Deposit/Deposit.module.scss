@@ -34,6 +34,8 @@
 
     .button {
       height: 100%;
+      position: relative;
+      padding: 0 30px;
     }
 
     .textError {
@@ -43,5 +45,19 @@
       margin-left: 10px;
       position: absolute;
     }
+  }
+
+  @keyframes spinner {
+    0% {
+      transform: translate3d(-50%, -50%, 0) rotate(0deg);
+    }
+    100% {
+      transform: translate3d(-50%, -50%, 0) rotate(360deg);
+    }
+  }
+  .spin {
+    animation: 1.5s linear infinite spinner;
+    animation-play-state: inherit;
+    position: absolute;
   }
 }
