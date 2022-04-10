@@ -5,7 +5,7 @@ import { BsGithub } from "react-icons/bs";
 const NavBar = () => (
   <div className={styles.container}>
     <a className={styles.github} href="">
-      <BsGithub size={30} />
+      <BsGithub size={35} />
     </a>
     <Wallet />
   </div>
