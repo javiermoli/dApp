@@ -11,7 +11,7 @@ import { queryClient } from "../utils/reactQuery";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider {...pageProps} client={queryClient}>
         <Web3ReactProvider getLibrary={getLibrary}>
           <Layout>
             <Component {...pageProps} />
